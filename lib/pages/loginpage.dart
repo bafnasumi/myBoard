@@ -1,20 +1,38 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../services/google_sign_in.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class LogInPage extends StatefulWidget {
+  const LogInPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<LogInPage> createState() => _LogInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _LogInPageState extends State<LogInPage> {
+//Text Controllers
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  //signIn
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim());
+  }
+
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -25,16 +43,11 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 SizedBox(height: 50),
-//App header
-// Icon(
-//   Icons.
-// ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "MyBoard",
-                    style: GoogleFonts.pacifico(fontSize: 54,fontWeight: FontWeight.bold)
-                  ),
+                  child: Text("MyBoard",
+                      style: GoogleFonts.pacifico(
+                          fontSize: 54, fontWeight: FontWeight.bold)),
                 ),
                 SizedBox(height: 10),
 
@@ -44,13 +57,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       'Welcome back! ',
                       style: GoogleFonts.lato(
-                            fontSize: 26, ),
+                        fontSize: 26,
+                      ),
                     ),
                     Text(
                       'Please enter your details.',
                       style: GoogleFonts.lato(
-                            fontSize: 26, ),
-                    
+                        fontSize: 26,
+                      ),
                     )
                   ],
                 ),
@@ -67,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: _emailController,
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Email'),
                       ),
@@ -88,6 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20.0),
                       child: TextField(
+                        controller: _passwordController,
                         obscureText: true,
                         decoration: InputDecoration(
                             border: InputBorder.none, hintText: 'Password'),
@@ -101,19 +117,22 @@ class _SignUpPageState extends State<SignUpPage> {
 //sign in button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 10, 75, 107),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                  child: GestureDetector(
+                    onTap: signIn,
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 10, 75, 107),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                        ),
                       ),
                     ),
                   ),
@@ -136,7 +155,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: GestureDetector(
                         onTap: () {
                           final provider = Provider.of<GoogleSignInProvider>(
-                              context,listen: false);
+                              context,
+                              listen: false);
                           provider.GoogleLogIn();
                         },
                         child: Center(
@@ -160,11 +180,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('New User? ',style: GoogleFonts.sourceSansPro(fontSize: 16, ),),
                     Text(
-                      'Register Now',
-                      style: GoogleFonts.sourceSansPro(fontSize: 16,color: Colors.lightBlue,fontWeight: FontWeight.bold)
-                    )
+                      'New User? ',
+                      style: GoogleFonts.sourceSansPro(
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text('Register Now',
+                        style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            color: Colors.lightBlue,
+                            fontWeight: FontWeight.bold))
                   ],
                 )
               ],

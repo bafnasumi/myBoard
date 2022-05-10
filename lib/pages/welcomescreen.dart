@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myboardapp/pages/loggedin.dart';
 import 'package:myboardapp/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import './homepage.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -24,9 +25,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Text('Something went wrong'),
             );
           } else if (snapshot.hasData) {
-            return const LoginPage();
+            return const HomePage();
           } else {
-            return const SignUpPage();
+            return const LogInPage();
           }
         },
       ),

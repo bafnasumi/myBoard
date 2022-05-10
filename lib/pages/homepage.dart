@@ -15,8 +15,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      // backgroundColor: Color.fromARGB(255, 199, 149, 0),
-      body: Text('lets start beautiful stuff'),
-    );
+        // backgroundColor: Color.fromARGB(255, 199, 149, 0),
+        body: SafeArea(
+      child: Text('Lets make something beautiful'),
+    ));
   }
 }

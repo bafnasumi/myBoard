@@ -18,7 +18,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:myboardapp/services/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -35,7 +34,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    
     return ChangeNotifierProvider(
+      
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
         title: 'welcomescreen',
@@ -44,7 +45,7 @@ class _MyAppState extends State<MyApp> {
           '/': (context) => const WelcomeScreen(),
           '/homepage': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
-          '/signup': (context) => const SignUpPage(),
+          '/signup': (context) => const LogInPage(),
           '/reminder': (context) => const Reminder(),
           '/voicetotext': (context) => const VoiceToText(),
           '/todo': (context) => const ToDo(),
