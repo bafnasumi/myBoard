@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myboardapp/pages/loggedin.dart';
-import 'package:myboardapp/pages/signuppage.dart';
+import 'package:myboardapp/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class WelcomeScreen extends StatefulWidget {

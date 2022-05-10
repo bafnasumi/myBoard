@@ -8,7 +8,7 @@ import 'package:myboardapp/pages/quotes.dart';
 import 'package:myboardapp/pages/reminder.dart';
 import 'package:myboardapp/pages/screenshots.dart';
 import 'package:myboardapp/pages/screentime.dart';
-import 'package:myboardapp/pages/signuppage.dart';
+import 'package:myboardapp/pages/loginpage.dart';
 import 'package:myboardapp/pages/todo.dart';
 import 'package:myboardapp/pages/video.dart';
 import 'package:myboardapp/pages/voicetotext.dart';
