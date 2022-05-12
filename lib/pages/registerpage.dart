@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,22 +7,21 @@ import 'package:provider/provider.dart';
 
 import '../services/google_sign_in.dart';
 
-class LogInPage extends StatefulWidget {
-  final VoidCallback showRegisterPage;
-  const LogInPage({Key? key, required this.showRegisterPage}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  const RegisterPage({Key? key, required this.showLoginPage,}) : super(key: key);
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
-//Text Controllers
+class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   //signIn
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signUp() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim());
   }
@@ -57,7 +56,7 @@ class _LogInPageState extends State<LogInPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Welcome back! ',
+                      'Hello There! ',
                       style: GoogleFonts.lato(
                         fontSize: 26,
                       ),
@@ -120,7 +119,7 @@ class _LogInPageState extends State<LogInPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: GestureDetector(
-                    onTap: signIn,
+                    onTap: signUp,
                     child: Container(
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(
@@ -129,7 +128,7 @@ class _LogInPageState extends State<LogInPage> {
                       ),
                       child: Center(
                         child: Text(
-                          'Sign In',
+                          'Sign Up',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -183,14 +182,14 @@ class _LogInPageState extends State<LogInPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'New User? ',
+                      'I am a member! ',
                       style: GoogleFonts.sourceSansPro(
                         fontSize: 16,
                       ),
                     ),
                     GestureDetector(
-                      onTap: widget.showRegisterPage,
-                      child: Text('Register Now',
+                      onTap: widget.showLoginPage,
+                      child: Text('Login now',
                           style: GoogleFonts.sourceSansPro(
                               fontSize: 16,
                               color: Colors.lightBlue,

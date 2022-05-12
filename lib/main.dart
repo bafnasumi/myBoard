@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myboardapp/pages/audio.dart';
+import 'package:myboardapp/pages/authpage.dart';
 import 'package:myboardapp/pages/homepage.dart';
 import 'package:myboardapp/pages/links.dart';
 import 'package:myboardapp/pages/loggedin.dart';
@@ -34,18 +35,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    
     return ChangeNotifierProvider(
-      
       create: (context) => GoogleSignInProvider(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'welcomescreen',
         initialRoute: '/',
         routes: {
           '/': (context) => const WelcomeScreen(),
           '/homepage': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
-          '/signup': (context) => const LogInPage(),
+          // '/signup': (context) => const LogInPage(),
           '/reminder': (context) => const Reminder(),
           '/voicetotext': (context) => const VoiceToText(),
           '/todo': (context) => const ToDo(),

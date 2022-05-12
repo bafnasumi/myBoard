@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myboardapp/pages/loggedin.dart';
+// import 'package:myboardapp/pages/loggedin.dart';
 import 'package:myboardapp/pages/loginpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import './homepage.dart';
+import 'authpage.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           } else if (snapshot.hasData) {
             return const HomePage();
           } else {
-            return const LogInPage();
+            return const AuthPage();
           }
         },
       ),
