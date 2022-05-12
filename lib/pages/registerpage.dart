@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,10 @@ import '../services/google_sign_in.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
-  const RegisterPage({Key? key, required this.showLoginPage,}) : super(key: key);
+  const RegisterPage({
+    Key? key,
+    required this.showLoginPage,
+  }) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -18,18 +21,31 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _ConfirmpasswordController = TextEditingController();
 
   //signIn
   Future signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+    }
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordController.text.trim() ==
+        _ConfirmpasswordController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _ConfirmpasswordController.dispose();
     super.dispose();
   }
 
@@ -112,10 +128,37 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 20,
+                // SizedBox(
+                //   height: 20,
+                // ),
+
+//confirm password
+                SizedBox(height: 12),
+                //email
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20.0),
+                      child: TextField(
+                        controller: _ConfirmpasswordController,
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Confirm Password'),
+                      ),
+                    ),
+                  ),
                 ),
-//sign in button
+                SizedBox(
+                  height: 30,
+                ),
+//sign up button
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: GestureDetector(
