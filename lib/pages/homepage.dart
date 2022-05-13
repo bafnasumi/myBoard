@@ -2,9 +2,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myboardapp/pages/loggedin.dart';
-import 'package:myboardapp/pages/loginpage.dart';
-import 'package:myboardapp/services/google_sign_in.dart';
+import './newpages.dart';
+// import 'package:myboardapp/pages/loggedin.dart';
+// import 'package:myboardapp/pages/loginpage.dart';
+// import 'package:myboardapp/services/google_sign_in.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,8 +28,14 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 FirebaseAuth.instance.signOut();
               },
-              color: Colors.teal.shade400,
+              color: Colors.teal.shade400,  
               child: Text('Sign Out'),
+            ),
+            MaterialButton(
+              onPressed: () {
+                Navigator.of(context).push(NewPage(1));
+              },
+              child: Text("todo"),
             )
           ],
         ),
